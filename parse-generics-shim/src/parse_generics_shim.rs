@@ -9,7 +9,7 @@ or distributed except according to those terms.
 */
 #[cfg(feature="use-parse-generics-poc")]
 #[doc(hidden)]
-#[macro_export]
+#[macro_export(local_inner_macros)]
 macro_rules! parse_generics_shim {
     ($($body:tt)*) => {
         parse_generics! { $($body)* }
@@ -18,7 +18,7 @@ macro_rules! parse_generics_shim {
 
 #[cfg(not(feature="use-parse-generics-poc"))]
 #[doc(hidden)]
-#[macro_export]
+#[macro_export(local_inner_macros)]
 macro_rules! parse_generics_shim {
     (
         @parse_start

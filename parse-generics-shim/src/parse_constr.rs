@@ -9,7 +9,7 @@ or distributed except according to those terms.
 */
 #[cfg(not(feature="use-parse-generics-poc"))]
 #[doc(hidden)]
-#[macro_export]
+#[macro_export(local_inner_macros)]
 macro_rules! parse_constr {
     (
         @parse

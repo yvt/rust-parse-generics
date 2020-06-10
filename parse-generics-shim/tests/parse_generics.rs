@@ -9,7 +9,8 @@ or distributed except according to those terms.
 */
 #![cfg_attr(feature="use-parse-generics-poc", feature(plugin))]
 #![cfg_attr(feature="use-parse-generics-poc", plugin(parse_generics_poc))]
-#[macro_use] extern crate parse_generics_shim;
+extern crate parse_generics_shim;
+extern crate rustc_version;
 
 macro_rules! as_item { ($i:item) => { $i } }
 
@@ -31,7 +32,7 @@ macro_rules! aeqiws {
 
 macro_rules! pgts {
     ($fields:tt, $($body:tt)*) => {
-        parse_generics_shim! {
+        parse_generics_shim::parse_generics_shim! {
             $fields,
             then stringify!(),
             $($body)*
@@ -435,24 +436,24 @@ fn test_passthru() {
         };
     }
 
-    parse_generics_shim! { { .. }, then emit!{a}, X }
-    parse_generics_shim! { { .. }, then emit!{b}, <> X }
-    parse_generics_shim! { { .. }, then emit!{c}, <T> X }
-    parse_generics_shim! { { .. }, then emit!{d}, <T,> X }
-    parse_generics_shim! { { .. }, then emit!{e}, <T, U> X }
-    parse_generics_shim! { { .. }, then emit!{f}, <T, U,> X }
-    parse_generics_shim! { { .. }, then emit!{g}, <T: Copy> X }
-    parse_generics_shim! { { .. }, then emit!{g2}, <T: Copy + Clone> X }
-    parse_generics_shim! { { .. }, then emit!{h}, <'a> X }
-    parse_generics_shim! { { .. }, then emit!{i}, <'a,> X }
-    parse_generics_shim! { { .. }, then emit!{j}, <'a, 'b> X }
-    parse_generics_shim! { { .. }, then emit!{k}, <'a, 'b,> X }
-    parse_generics_shim! { { .. }, then emit!{l}, <'a, 'b: 'a> X }
-    parse_generics_shim! { { .. }, then emit!{l2}, <'a, 'b: 'a, 'c: 'a + 'b> X }
-    parse_generics_shim! { { .. }, then emit!{m}, <'a, T: 'a + Copy> X }
-    parse_generics_shim! { { .. }, then emit!{m2}, <'a, T: 'a + Copy + Clone> X }
-    parse_generics_shim! { { .. }, then emit!{n}, <T: 'static> X }
-    parse_generics_shim! { { .. }, then emit!{o}, <T: From<u8>> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{a}, X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{b}, <> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{c}, <T> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{d}, <T,> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{e}, <T, U> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{f}, <T, U,> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{g}, <T: Copy> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{g2}, <T: Copy + Clone> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{h}, <'a> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{i}, <'a,> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{j}, <'a, 'b> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{k}, <'a, 'b,> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{l}, <'a, 'b: 'a> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{l2}, <'a, 'b: 'a, 'c: 'a + 'b> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{m}, <'a, T: 'a + Copy> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{m2}, <'a, T: 'a + Copy + Clone> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{n}, <T: 'static> X }
+    parse_generics_shim::parse_generics_shim! { { .. }, then emit!{o}, <T: From<u8>> X }
 
     let _ = "the rustc parser is stoopid";
 }
