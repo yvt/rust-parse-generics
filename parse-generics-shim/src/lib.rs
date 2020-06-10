@@ -503,26 +503,26 @@ rustup override add nightly-2016-04-06
 macro_rules! parse_generics_shim_util {
     (
         @callback
-        ($cb_name:ident ! ($($cb_arg:tt)*)),
+        ($cb_name:ident $(::$cb_sub:ident)* ! ($($cb_arg:tt)*)),
         $($tail:tt)*
     ) => {
-        $cb_name! { $($cb_arg)* $($tail)* }
+        $cb_name $(::$cb_sub)* ! { $($cb_arg)* $($tail)* }
     };
 
     (
         @callback
-        ($cb_name:ident ! [$($cb_arg:tt)*]),
+        ($cb_name:ident $(::$cb_sub:ident)* ! [$($cb_arg:tt)*]),
         $($tail:tt)*
     ) => {
-        $cb_name! { $($cb_arg)* $($tail)* }
+        $cb_name $(::$cb_sub)* ! { $($cb_arg)* $($tail)* }
     };
 
     (
         @callback
-        ($cb_name:ident ! {$($cb_arg:tt)*}),
+        ($cb_name:ident $(::$cb_sub:ident)* ! {$($cb_arg:tt)*}),
         $($tail:tt)*
     ) => {
-        $cb_name! { $($cb_arg)* $($tail)* }
+        $cb_name $(::$cb_sub)* ! { $($cb_arg)* $($tail)* }
     };
 }
 

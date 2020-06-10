@@ -263,13 +263,13 @@ macro_rules! parse_constr {
 
     (
         ($allow_lt:tt, $allow_tr:tt),
-        then $callback:ident!$callback_arg:tt,
+        then $callback:ident$(::$callback_sub:ident)*!$callback_arg:tt,
         $($body:tt)*
     ) => {
         parse_constr! {
             @parse
             {
-                ($callback!$callback_arg)
+                ($callback$(::$callback_sub)*!$callback_arg)
             },
             ($allow_lt, $allow_tr),
             {},

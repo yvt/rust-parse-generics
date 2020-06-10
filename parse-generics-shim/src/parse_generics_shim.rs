@@ -356,12 +356,12 @@ macro_rules! parse_generics_shim {
 
     (
         $fields:tt,
-        then $callback:ident!$callback_arg:tt,
+        then $callback:ident$(::$callback_sub:ident)*!$callback_arg:tt,
         $($body:tt)*
     ) => {
         parse_generics_shim! {
             @parse_start
-            { $fields, ($callback!$callback_arg) },
+            { $fields, ($callback$(::$callback_sub)*!$callback_arg) },
             $($body)*
         }
     };

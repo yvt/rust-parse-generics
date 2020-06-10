@@ -274,12 +274,12 @@ macro_rules! parse_where_shim {
 
     (
         $fields:tt,
-        then $callback:ident!$callback_arg:tt,
+        then $callback:ident$(::$callback_sub:ident)*!$callback_arg:tt,
         where $($body:tt)*
     ) => {
         parse_where_shim! {
             @parse
-            { $fields, ($callback!$callback_arg) },
+            { $fields, ($callback$(::$callback_sub)*!$callback_arg) },
             { preds: [], },
             $($body)*
         }
@@ -287,12 +287,12 @@ macro_rules! parse_where_shim {
 
     (
         $fields:tt,
-        then $callback:ident!$callback_arg:tt,
+        then $callback:ident$(::$callback_sub:ident)*!$callback_arg:tt,
         $($body:tt)*
     ) => {
         parse_where_shim! {
             @emit_output
-            { $fields, ($callback!$callback_arg) },
+            { $fields, ($callback$(::$callback_sub)*!$callback_arg) },
             { preds: [], },
             $($body)*
         }
